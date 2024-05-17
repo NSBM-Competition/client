@@ -2,10 +2,11 @@ import React, { useCallback, useRef, useState } from 'react';
 import { GoogleMap, LoadScript, Marker, StandaloneSearchBox } from '@react-google-maps/api';
 
 const containerStyle = {
-  width: '80%',
+  width: '100%',
   height: '600px',
-justifyContent: 'center',
-alignItems: 'center',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 };
 
 const center = {
@@ -17,7 +18,7 @@ const Home = () => {
   const [searchBox, setSearchBox] = useState(null);
   const [markers, setMarkers] = useState([]);
   const mapRef = useRef(null);
-
+  
   const onLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);
@@ -48,8 +49,10 @@ const Home = () => {
   }, [searchBox]);
 
   return (
+    
     <LoadScript googleMapsApiKey="AIzaSyB61t78UY4piRjSDjihdHxlF2oqtrtzw8U" libraries={['places']}>
-      <div>
+    <div style={{ width: '100%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ ...containerStyle, margin: 'auto' }}>
         <StandaloneSearchBox onLoad={onSearchBoxLoad} onPlacesChanged={onPlacesChanged}>
           <input
             type="text"
@@ -57,23 +60,24 @@ const Home = () => {
             style={{
               boxSizing: 'border-box',
               border: '1px solid transparent',
-              width: '240px',
+              width: '300px',
               height: '32px',
               padding: '0 12px',
-              borderRadius: '3px',
+              borderRadius: '11px',
               boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
               fontSize: '14px',
               outline: 'none',
               textOverflow: 'ellipses',
               position: 'absolute',
               left: '50%',
-              marginLeft: '-120px',
-              top: '10px',
+              zIndex: '1',
+              marginLeft: '50px',
+              top: '80px',
             }}
           />
         </StandaloneSearchBox>
         <GoogleMap
-          mapContainerStyle={containerStyle}
+          mapContainerStyle={{ width: '80%', height: '100%' }}
           center={center}
           zoom={10}
           onLoad={onLoad}
@@ -83,7 +87,8 @@ const Home = () => {
           ))}
         </GoogleMap>
       </div>
-    </LoadScript>
+    </div>
+  </LoadScript>
   );
 };
 
