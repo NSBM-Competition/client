@@ -1,9 +1,11 @@
 import React from 'react'
 
-export default function App() {
+const RealTimeTrack = () => {
   return (
     <div>
       <p>hello</p>
     </div>
   )
 }
+
+export default RealTimeTrack
